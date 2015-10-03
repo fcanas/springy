@@ -49,7 +49,7 @@ class SpringyView: UIView {
     
     func perturbWeight() {
         let push = UIPushBehavior(items: [weightView!], mode: UIPushBehaviorMode.Instantaneous)
-        push.pushDirection = CGVector(dx: 0, dy: 10)
+        push.pushDirection = CGVector(dx: 0, dy: -3)
         animator?.addBehavior(push)
     }
     
@@ -59,8 +59,8 @@ class SpringyView: UIView {
         addSubview(weightView!)
         let gravity = UIGravityBehavior(items: [weightView!])
         let spring = UIAttachmentBehavior(item: weightView!, attachedToAnchor: CGPoint(x: 0, y: 0))
-        spring.length = 100
-        spring.damping = 0.8
+        spring.length = 50
+        spring.damping = 0.7
         animator?.addBehavior(gravity)
         animator?.addBehavior(spring)
     }
@@ -84,8 +84,8 @@ class SpringyView: UIView {
     }
     
     func updateShape(link :CADisplayLink) {
-        innerRadius = weightView!.frame.origin.y
-        outerRadius = -2 * weightView!.frame.origin.y
+        innerRadius = -80 - weightView!.frame.origin.y / 1.10
+        outerRadius = 80 - weightView!.frame.origin.y / 2.20
         shapeLayer.path = shape()
     }
 
